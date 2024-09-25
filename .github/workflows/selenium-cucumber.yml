@@ -27,16 +27,18 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/automation_script/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Step 4: Build the Maven project
+      # Step 4: Navigate to the automation script directory and build the Maven project
       - name: Build with Maven
+        working-directory: automation_script
         run: mvn clean install
 
       # Step 5: Run tests with Maven
       - name: Run Selenium Cucumber tests
+        working-directory: automation_script
         run: mvn test -DsuiteXmlFile=testng.xml
 
       # Step 6: Upload screenshots for failed tests
@@ -45,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: failed-test-screenshots
-          path: path/to/screenshots # Replace this with the actual path where you store screenshots
+          path: automation_script/path/to/screenshots # Replace this with the actual path to your screenshot directory inside automation_script
 
       # Step 7: Upload TestNG report
       - name: Upload TestNG report
@@ -54,7 +56,7 @@ jobs:
         with:
           name: test-report
           path: |
-            target/surefire-reports/index.html
-            target/surefire-reports/*.css
-            target/surefire-reports/*.js
-            target/surefire-reports/*.png
+            automation_script/target/surefire-reports/index.html
+            automation_script/target/surefire-reports/*.css
+            automation_script/target/surefire-reports/*.js
+            automation_script/target/surefire-reports/*.png
