@@ -1,7 +1,7 @@
 @job_application
 Feature: Job Application
 
-#  Scenario: Verify success fill personal data
+  Scenario: Verify success fill personal data
     Given User opens qa engineer job
     When User apply the job
     When User fills personal data
