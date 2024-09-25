@@ -1,7 +1,7 @@
 name: Selenium Cucumber CI
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual triggering
   push:
     branches:
       - main
@@ -32,25 +32,29 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Step 4: Navigate to the automation script directory and build the Maven project
+      # Step 4: Install Chrome
+      - name: Set up Chrome for Selenium
+        run: sudo apt-get install -y google-chrome-stable
+
+      # Step 5: Build the Maven project
       - name: Build with Maven
         working-directory: automation_script
         run: mvn clean install
 
-      # Step 5: Run tests with Maven
+      # Step 6: Run Selenium Cucumber tests in headless mode
       - name: Run Selenium Cucumber tests
         working-directory: automation_script
         run: mvn test -DsuiteXmlFile=testng.xml
 
-      # Step 6: Upload screenshots for failed tests
+      # Step 7: Upload screenshots for failed tests
       - name: Upload failed test screenshots
         if: failure()
         uses: actions/upload-artifact@v3
         with:
           name: failed-test-screenshots
-          path: automation_script/path/to/screenshots # Replace this with the actual path to your screenshot directory inside automation_script
+          path: automation_script/screenshots
 
-      # Step 7: Upload TestNG report
+      # Step 8: Upload TestNG report
       - name: Upload TestNG report
         if: always()
         uses: actions/upload-artifact@v3
