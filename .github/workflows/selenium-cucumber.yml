@@ -46,6 +46,9 @@ jobs:
         working-directory: automation_script
         run: mvn test -DsuiteXmlFile=testng.xml
 
+      - name: Check if screenshots directory exists
+        run: if [ -d automation_script/screenshots ]; then echo "Directory exists"; else echo "No screenshots"; fi
+
       # Step 7: Upload screenshots for failed tests
       - name: Upload failed test screenshots
         if: failure()
