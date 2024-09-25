@@ -15,12 +15,12 @@ Feature: Job Application
     Then User sees complete info
 
 
-#  Scenario: Verify success upload cv by drag and drop
-#    Given User opens qa engineer job
-#    When User apply the job
-#    When User fills personal data
-#    When User drag and drop valid cv
-#    Then User sees complete info
+  Scenario: Verify success upload cv by drag and drop
+    Given User opens qa engineer job
+    When User apply the job
+    When User fills personal data
+    When User drag and drop valid cv
+    Then User sees complete info
 
   Scenario: Verify success info after job application
     Given User opens qa engineer job

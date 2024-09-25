@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: failed-test-screenshots
-          path: automation_script/screenshots
+          path: automation_script/screenshots/*.png
 
       # Step 8: Upload TestNG report
       - name: Upload TestNG report
