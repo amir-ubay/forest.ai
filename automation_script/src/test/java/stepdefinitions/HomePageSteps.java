@@ -45,6 +45,6 @@ public class HomePageSteps {
     @Then("User sees correct homepage title")
     public void user_sees_correct_homepage_title() {
         String pageTitle = driver.getTitle();
-        Assert.assertNotEquals(pageTitle, "Forest Technologies | Leading B2B Technology Solutions");
+        Assert.assertEquals(pageTitle, "Forest Technologies | Leading B2B Technology Solutions");
     }
 }
