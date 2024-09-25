@@ -1,0 +1,60 @@
+name: Selenium Cucumber CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java environment
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "11"
+
+      # Step 3: Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 4: Build the Maven project
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Step 5: Run tests with Maven
+      - name: Run Selenium Cucumber tests
+        run: mvn test -DsuiteXmlFile=testng.xml
+
+      # Step 6: Upload screenshots for failed tests
+      - name: Upload failed test screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-test-screenshots
+          path: path/to/screenshots # Replace this with the actual path where you store screenshots
+
+      # Step 7: Upload TestNG report
+      - name: Upload TestNG report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: |
+            target/surefire-reports/index.html
+            target/surefire-reports/*.css
+            target/surefire-reports/*.js
+            target/surefire-reports/*.png
