@@ -84,16 +84,23 @@ public class JobPage extends CareersPage {
 
         WebElement dropArea = driver.findElement(dropLocator);
 
+        String js = "function simulateFileUploadDragAndDrop(targetElement, fileUrl, fileName) {"
+                    + "fetch(fileUrl)"
+                    + ".then(response => response.blob())"
+                    + ".then(blob => {"
+                    + "const file = new File([blob], fileName, { type: blob.type });"
+                    + "const dataTransfer = new DataTransfer();"
+                    + "dataTransfer.items.add(file);"
+                    + "const dropEvent = new DragEvent('drop', { dataTransfer: dataTransfer, bubbles: true, cancelable: true });"
+                    + "targetElement.dispatchEvent(dropEvent);"
+                    + "})"
+                    + ".catch(error => console.error('Error:', error));"
+                    + "}"
+                    + "simulateFileUploadDragAndDrop(arguments[0], arguments[1], 'cvdummy.pdf');";
 
-        String js = "var target = arguments[0], "
-                + "file = new File([" + "new Blob(['" + filePath + "'], {type: 'application/pdf'})" + "], '" + testUploadFile.getName() + "');"
-                + "var dataTransfer = new DataTransfer();"
-                + "dataTransfer.items.add(file);"
-                + "var event = new DragEvent('drop', {dataTransfer: dataTransfer});"
-                + "target.dispatchEvent(event);";
-
-
-        ((JavascriptExecutor) driver).executeScript(js, dropArea);
+            // Use JavascriptExecutor to run the script in the browser
+            JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+            jsExecutor.executeScript(js, dropArea, filePath);
 
 
         waitUntilPresence(10, uploadComplete);
