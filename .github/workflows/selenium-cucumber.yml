@@ -36,6 +36,11 @@ jobs:
       - name: Set up Chrome for Selenium
         run: sudo apt-get install -y google-chrome-stable
 
+      # Step 5 : Install Dependencies
+      - name: Install Maven dependencies
+        working-directory: automation_script
+        run: mvn clean install -DskipTests
+
       # Step 6: Run Selenium Cucumber tests in headless mode
       - name: Run Selenium Cucumber tests
         working-directory: automation_script

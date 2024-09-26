@@ -5,19 +5,19 @@
 3. Run `mvn clean install -DskipTests` to install the dependecy
 4. Run `mvn test -DsuiteXmlFile=testng.xml` to start the main test
 
-### Test Reports in Local
+## Test Reports in Local
 
 1. After finished running the test, a new directory `target` will be generated.
 2. The testng report can be found inside directory `target/surefire-reports/index.html`.
 3. Open the `index.html` to open the report
 
-### Failed test screenshot
+## Failed test screenshot
 
 1. After finished running the test, a new directory `screenshots` will be generated.
 2. If there any failed scenario, there will be image .png file can be found here.
 3. The image file name has format `<<scenario_name>>_<<timeStamp>.png` to easily relate the screenshot to the correct scenario.
 
-### Run in CI github-action
+## Run in CI github-action
 
 Currently the test is a standalone workflow. So there are two methods to trigger the test in CI github-action
 
@@ -26,20 +26,20 @@ Currently the test is a standalone workflow. So there are two methods to trigger
 3. After test finished, there will be 2 test artifact; `screenshots failed scenario` and `test_report`. Screenshots artifact will only appear if there any scenario failed. Bu test report will always be generated no matter the test result is.
 4. To open the artifacts, you need to download and extracts them first.
 
-### Automation Test Scopes
+## Automation Test Scopes
 
-#### 1.Feature: Home functionality
+### 1.Feature: Home functionality
 
 1. Scenario: Verify homepage title
 2. Scenario: Verify navigation to career page
 
-#### 2. Feature: Careers functionality
+### 2. Feature: Careers functionality
 
 1. Scenario: Verify job page title software engineer
 2. Scenario: Verify job page title qa engineer
 3. Scenario: Verify job page title qa engineer
 
-#### 3. Feature: Job Application
+### 3. Feature: Job Application
 
 1. Scenario: Verify success fill personal data
 2. Scenario: Verify success upload cv
