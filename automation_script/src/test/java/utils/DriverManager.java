@@ -18,8 +18,8 @@ public class DriverManager {
             // Create ChromeOptions object to enable headless mode and other configurations
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless");  // Run Chrome in headless mode
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
+            // options.addArguments("--no-sandbox");
+            // options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--disable-gpu"); // Disable GPU acceleration
             options.addArguments("--window-size=1920x1080");
 

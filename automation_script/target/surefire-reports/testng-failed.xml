@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [forest.ai automation]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="Job Application Test(failed)" verbose="0">
+    <classes>
+      <class name="runner.TestRunner">
+        <methods>
+          <include name="setUpClass"/>
+          <include name="tearDownClass"/>
+          <include name="runScenario" invocation-numbers="7"/>
+        </methods>
+      </class> <!-- runner.TestRunner -->
+    </classes>
+  </test> <!-- Job Application Test(failed) -->
+</suite> <!-- Failed suite [forest.ai automation] -->

@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="false" verbose="1" outputDirectory="testng-report">
-    <test name="CucumberTest">
+<suite name="forest.ai automation" parallel="false" verbose="1">
+    <test name="Job Application Test">
         <classes>
             <class name="runner.TestRunner" />  <!-- Your TestNG runner class -->
         </classes>

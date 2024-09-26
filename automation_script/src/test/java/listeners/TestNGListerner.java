@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import utils.*;
 
 public class TestNGListerner implements ITestListener {
 
@@ -19,15 +20,7 @@ public class TestNGListerner implements ITestListener {
         // Capture screenshot on test failure
         WebDriver driver = DriverManager.getDriver();
         if (driver != null) {
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            File source = ts.getScreenshotAs(OutputType.FILE);
-            try {
-                // Save the screenshot to a specific location with a unique name
-                Files.copy(source.toPath(), Paths.get("screenshots", result.getName() + ".png"));
-                System.out.println("Screenshot saved for failed test: " + result.getName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+             ScreenshotUtils.captureScreenshot(driver, result.getTestName());
         }
     }
 }

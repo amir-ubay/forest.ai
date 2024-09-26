@@ -25,9 +25,7 @@ public class Hooks {
         if (driver != null) {
             try {
                 if (scenario.isFailed()) {
-//                    ScreenshotUtils.captureScreenshot(driver, scenario.getName());
-                    final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-                    scenario.attach(screenshot, "image/png", "Failed Scenario Screenshot");
+                    ScreenshotUtils.captureScreenshot(driver, scenario.getName());
                 }
             } catch (WebDriverException e) {
                 System.err.println("Unable to capture screenshot: " + e.getMessage());
